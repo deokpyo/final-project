@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+  </head>
+  <body>
+    <h1>Create Employee</h1>
+    <form action="/api/employee" method="post">
+        <input type="text" name="first_name" placeholder="First Name" />
+        <br/>
+        <input type="text" name="last_name" placeholder="Last Name" />
+        <br/>
+        <input type="submit" value="Create Employee" />
+    </form>
+        <h1>Create Vacation</h1>
+    <form action="/api/vacation/59039359bf0ef51e63b33b45" method="post">
+        <input type="text" name="start_date" placeholder="Start Date" />
+        <br/>
+        <input type="text" name="end_date" placeholder="End Date" />
+        <br/>
+        <input type="submit" value="Create Vacation" />
+    </form>
+  </body>
+</html>
