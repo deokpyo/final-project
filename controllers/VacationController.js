@@ -45,7 +45,7 @@ module.exports = {
             callback(null, vacation)
         })
     },
-
+    
     // del request
     delete: function (id, callback) {
         Vacation.findByIdAndRemove(id, function(err){

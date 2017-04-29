@@ -44,7 +44,7 @@ router.get('/:resource/:id', function (req, res, next) {
         return
     }
 
-    controller.findById(id, function (err, result) {
+    controller.findById(id, function (err, results) {
         if (err) {
             res.json({
                 confirmation: 'fail',
@@ -54,7 +54,7 @@ router.get('/:resource/:id', function (req, res, next) {
         }
         res.json({
             confirmation: 'success',
-            result: result
+            results: results
         })
     })
 })
@@ -73,7 +73,7 @@ router.delete('/:resource/:id', function (req, res, next) {
         return
     }
 
-    controller.delete(id, function (err, result) {
+    controller.delete(id, function (err, results) {
         if (err) {
             res.json({
                 confirmation: 'fail',
@@ -83,7 +83,37 @@ router.delete('/:resource/:id', function (req, res, next) {
         }
         res.json({
             confirmation: 'success',
-            result: result
+            results: results
+        })
+    })
+})
+
+// PUT route to update by id
+router.put('/:resource/:id', function (req, res, next) {
+    
+    var resource = req.params.resource;
+    var id = req.params.id;
+    var controller = controllers[resource];
+
+    if (controller == null) {
+        res.json({
+            confirmation: 'fail',
+            message: 'Invalid Resource Request: ' + resource
+        })
+        return
+    }
+
+    controller.update(id, req.body, function (err, results) {
+        if (err) {
+            res.json({
+                confirmation: 'fail',
+                message: 'Not Found'
+            })
+            return
+        }
+        res.json({
+            confirmation: 'success',
+            results: results
         })
     })
 })
@@ -103,7 +133,7 @@ router.post('/:resource', function (req, res, next) {
         return
     }
 
-    controller.create(req.body, function (err, result) {
+    controller.create(req.body, function (err, results) {
         if (err) {
             res.json({
                 confirmation: 'fail',
@@ -113,7 +143,7 @@ router.post('/:resource', function (req, res, next) {
         }
         res.json({
             confirmation: 'success',
-            result: result
+            results: results
         })
     })
 })
@@ -134,7 +164,7 @@ router.post('/:resource/:id', function (req, res, next) {
         return
     }
     // create the new vacation
-    controller.create(req.body, function (err, result) {
+    controller.create(req.body, function (err, results) {
         if (err) {
             res.json({
                 confirmation: 'fail',
@@ -146,7 +176,7 @@ router.post('/:resource/:id', function (req, res, next) {
             var controller = controllers['employee'];
             // grab the vacation id
             // use employee id to push the vacation information on employee data
-            controller.findOneAndUpdate(id, result, function (err, employee) {
+            controller.findOneAndUpdate(id, results, function (err, employee) {
                 if (err) {
                     res.json({
                         confirmation: 'fail',
@@ -156,7 +186,7 @@ router.post('/:resource/:id', function (req, res, next) {
                 }
                 res.json({
                     confirmation: 'success',
-                    result: employee
+                    results: employee
                 })
             })
 

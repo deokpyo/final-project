@@ -11,6 +11,26 @@ var EmployeeSchema = new Schema({
         type: String,
         default: ''
     },
+    phone: {
+        type: String,
+        default: ''
+    },
+    email: {
+        type: String,
+        default: ''
+    },
+    position: {
+        type: String,
+        default: ''
+    },
+    type: {
+        type: String,
+        default: ''
+    },
+    info: {
+        type: String,
+        default: ''
+    },
     isEmployer: {
         type: Boolean,
         default: false

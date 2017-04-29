@@ -3,11 +3,19 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Employee Tracker' });
 });
 
-router.get('/create', function(req, res, next) {
-  res.render('create', { title: 'Create Demo Page' });
+router.get('/calendar', function(req, res, next) {
+  res.render('index', { title: 'Employee Tracker' });
+});
+
+router.get('/employees', function(req, res, next) {
+  res.render('index', { title: 'Employee Tracker' });
+});
+
+router.get('/vacations', function(req, res, next) {
+  res.render('index', { title: 'Employee Tracker' });
 });
 
 module.exports = router;
