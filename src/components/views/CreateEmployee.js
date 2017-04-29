@@ -60,10 +60,12 @@ export default class CreateEmployee extends React.Component {
                 <Form.Group widths='equal'>
                     <Form.Input label='First Name' placeholder='First Name' name='first_name' onChange={this.handleChange.bind(this)} />
                     <Form.Input label='Last Name' placeholder='Last Name' name='last_name' onChange={this.handleChange.bind(this)} />
-                    <Form.Input label='Email' placeholder='Email' name='email' onChange={this.handleChange.bind(this)} />
                 </Form.Group>
                 <Form.Group widths='equal'>
                     <Form.Input label='Phone' placeholder='Phone' name='phone' onChange={this.handleChange.bind(this)} />
+                    <Form.Input label='Email' placeholder='Email' name='email' onChange={this.handleChange.bind(this)} />
+                    </Form.Group>
+                <Form.Group widths='equal'>
                     <Form.Input label='Position' placeholder='Position' name='position' onChange={this.handleChange.bind(this)} />
                     <Form.Select label='Type' options={options} name='type' placeholder='Type' onChange={this.optionChange.bind(this)}  />
                 </Form.Group>

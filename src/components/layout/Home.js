@@ -23,7 +23,7 @@ export default class Home extends React.Component {
                         <Grid.Column width={3}>
                             <Nav/>
                         </Grid.Column>
-                        <Grid.Column stretched width={13}>
+                        <Grid.Column width={13}>
                             <Switch>
                                 <Route exact path='/' component={Main} />
                                 <Route path='/calendar' component={Calendar} />
