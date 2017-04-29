@@ -13,7 +13,7 @@ export default class WorldClock extends React.Component {
                 </Table.Header>
 
                 <Table.Body>
-                    <Table.Row>
+                    <Table.Row className='ui center aligned'>
                         <Table.Cell>
                             <WorldTime
                                 cities={[{
