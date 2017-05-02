@@ -1,5 +1,5 @@
 import React from 'react'
-import { APIManager } from '../../utils'
+import { dbAPI } from '../../utils'
 import { Employee, CreateEmployee } from '../views'
 import { Header, Icon, Table, Divider, Segment } from 'semantic-ui-react'
 
@@ -12,7 +12,7 @@ export default class Employees extends React.Component {
     }
 
     componentDidMount() {
-        APIManager.get('/api/employee', null, (err, response) => {
+        dbAPI.get('/api/employee', null, (err, response) => {
             if (err) {
                 alert('GET ERROR:' + err.message)
                 return
@@ -29,7 +29,7 @@ export default class Employees extends React.Component {
     createEmployee(employee) {
         console.log('new employee: ' + JSON.stringify(employee));
         let newEmployee = Object.assign({}, employee);
-        APIManager.post('/api/employee', newEmployee, (err, response) => {
+        dbAPI.post('/api/employee', newEmployee, (err, response) => {
             if (err) {
                 alert('POST ERROR: ' + err.message);
                 return
@@ -46,7 +46,7 @@ export default class Employees extends React.Component {
     // delete employee then update the list
     deleteEmployee(id){
         console.log("delete: " + id);
-        APIManager.delete('/api/employee/', id, (err, response) => {
+        dbAPI.delete('/api/employee/', id, (err, response) => {
             if(err){
                 alert('DELETE ERROR: ' + err.message);
                 return
@@ -81,6 +81,7 @@ export default class Employees extends React.Component {
                         <Header.Subheader>Manage employee information</Header.Subheader>
                     </Header.Content>
                 </Header>
+                
                 <Table singleLine selectable>
                     <Table.Header>
                         <Table.Row>

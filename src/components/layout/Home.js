@@ -8,11 +8,11 @@ export default class Home extends React.Component {
     render() {
         return (
             <Container>
-                <Grid stackable>
+                <Grid stackable doubling>
                     <Grid.Row></Grid.Row>
                     <Grid.Row>
                         <Grid.Column width={16}><Segment ><Header as='h2'>
-                        <Icon loading name='user circle outline'/>
+                        <Icon name='user circle outline'/>
                             <Header.Content >Employee Tracker
                                 <Header.Subheader>Manage your employees</Header.Subheader>
                             </Header.Content>

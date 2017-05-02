@@ -1,5 +1,5 @@
 import React from 'react'
-import { APIManager } from '../../utils'
+import { dbAPI } from '../../utils'
 import { Vacation, CreateVacation } from '../views'
 import { Header, Icon, Table, Divider, Segment } from 'semantic-ui-react'
 
@@ -12,7 +12,7 @@ export default class Vacations extends React.Component {
     }
 
     componentDidMount() {
-        APIManager.get('/api/vacation', null, (err, response) => {
+        dbAPI.get('/api/vacation', null, (err, response) => {
             if (err) {
                 alert('GET ERROR:' + err.message)
                 return
@@ -29,7 +29,7 @@ export default class Vacations extends React.Component {
     createVacation(vacation) {
         //console.log('new vacation: ' + JSON.stringify(vacation));
         let newVacation = Object.assign({}, vacation);
-        APIManager.post('/api/vacation', newVacation, (err, response) => {
+        dbAPI.post('/api/vacation', newVacation, (err, response) => {
             if (err) {
                 alert('POST ERROR: ' + err.message);
                 return
@@ -46,13 +46,13 @@ export default class Vacations extends React.Component {
     // delete vacation then update the list
     deleteVacation(id) {
         //console.log("delete: " + id);
-        APIManager.delete('/api/vacation/', id, (err, response) => {
+        dbAPI.delete('/api/vacation/', id, (err, response) => {
             if (err) {
                 alert('DELETE ERROR: ' + err.message);
                 return
             }
             console.log('VACATION DELETED: ' + JSON.stringify(response));
-            APIManager.get('/api/vacation', null, (err, response) => {
+            dbAPI.get('/api/vacation', null, (err, response) => {
                 if (err) {
                     alert('GET ERROR:' + err.message);
                     return
@@ -69,14 +69,14 @@ export default class Vacations extends React.Component {
     updateVacation(id, data) {
         var url = '/api/vacation/' + id
         var body = { status: data }
-        APIManager.put(url, body, (err, response) => {
+        dbAPI.put(url, body, (err, response) => {
             if (err) {
                 alert('UPDATE ERROR: ' + err.message);
                 return
             }
             console.log('STATUS UPDATED: ' + JSON.stringify(response));
             let results = response.results;
-            APIManager.get('/api/vacation', null, (err, response) => {
+            dbAPI.get('/api/vacation', null, (err, response) => {
                 if (err) {
                     alert('GET ERROR:' + err.message);
                     return
@@ -104,7 +104,7 @@ export default class Vacations extends React.Component {
                         <Header.Subheader>Manage employee vacation/personal/sick time-off requests</Header.Subheader>
                     </Header.Content>
                 </Header>
-                <Table singleLine selectable>
+                <Table singleLine selectable stackable>
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell>Name</Table.HeaderCell>

@@ -1,5 +1,9 @@
-import APIManager from './APIManager'
+import dbAPI from './dbAPI'
+import calendarAPI from './calendarAPI'
+import slackAPI from './slackAPI'
 
 export {
-    APIManager
+    dbAPI,
+    calendarAPI,
+    slackAPI,
 }
