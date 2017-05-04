@@ -22,7 +22,7 @@ export default class Nav extends React.Component {
         const { activeItem } = this.state;
         const styles = style.nav;
         return (
-            <Menu style={styles} pointing secondary vertical>
+            <Menu style={styles} pointing secondary>
                 <Menu.Item as={Link} to="/" id='home' active={activeItem === 'home'} onClick={this.handleClick.bind(this)}>Home</Menu.Item>
                 <Menu.Item as={Link} to='/calendar' id='calendar' active={activeItem === 'calendar'} onClick={this.handleClick.bind(this)}>Calendar</Menu.Item>
                 <Menu.Item as={Link} to='/employees' id='employees' active={activeItem === 'employees'} onClick={this.handleClick.bind(this)}>Employees</Menu.Item>

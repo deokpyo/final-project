@@ -29,7 +29,7 @@ export default class Employees extends React.Component {
     createEmployee(employee) {
         console.log('new employee: ' + JSON.stringify(employee));
         let newEmployee = Object.assign({}, employee);
-        dbAPI.post('/api/employee', newEmployee, (err, response) => {
+        dbAPI.post('/api/employee/', newEmployee, (err, response) => {
             if (err) {
                 alert('POST ERROR: ' + err.message);
                 return
@@ -52,7 +52,7 @@ export default class Employees extends React.Component {
                 return
             }
             console.log('EMPLOYEE DELETED: ' + JSON.stringify(response));
-            APIManager.get('/api/employee', null, (err, response) => {
+            dbAPI.get('/api/employee', null, (err, response) => {
             if (err) {
                 alert('GET ERROR:' + err.message);
                 return
@@ -66,10 +66,34 @@ export default class Employees extends React.Component {
         })
     }
 
+    updateEmployee(data) {
+        //console.log('update employee: ' + data._id, data)
+        var url = '/api/employee/' + data._id
+        dbAPI.put(url, data, (err, response) => {
+            if (err) {
+                alert('UPDATE ERROR: ' + err.message);
+                return
+            }
+            console.log('EMPLOYEE UPDATED: ' + JSON.stringify(response));
+            let results = response.results;
+            dbAPI.get('/api/employee', null, (err, response) => {
+                if (err) {
+                    alert('GET ERROR:' + err.message);
+                    return
+                }
+                //console.log(JSON.stringify(response));
+                let results = response.results;
+                this.setState({
+                    list: results
+                })
+            })
+        })
+    }
+
     render() {
         const employeeList = this.state.list.map((employee, i) => {
             return (
-                <Employee delete={this.deleteEmployee.bind(this)} employee={employee} key={i} />
+                <Employee delete={this.deleteEmployee.bind(this)} update={this.updateEmployee.bind(this)} employee={employee} key={i} />
             )
         })
 
@@ -82,7 +106,7 @@ export default class Employees extends React.Component {
                     </Header.Content>
                 </Header>
                 
-                <Table singleLine selectable>
+                <Table singleLine selectable stackable fixed>
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell>Name</Table.HeaderCell>

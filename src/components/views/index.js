@@ -4,6 +4,7 @@ import Employee from './Employee'
 import Vacation from './Vacation'
 import WorldClock from './WorldClock'
 import EmployeeStatus from './EmployeeStatus'
+import EditEmployee from './EditEmployee'
 
 export {
     CreateEmployee,
@@ -12,4 +13,5 @@ export {
     Vacation,
     WorldClock,
     EmployeeStatus,
+    EditEmployee,
 }

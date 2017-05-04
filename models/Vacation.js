@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
 
 var VacationSchema = new mongoose.Schema({
-    name: {
+    emp_id: {
         type: String,
         default: ''
     },

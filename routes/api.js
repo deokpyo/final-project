@@ -90,7 +90,7 @@ router.delete('/:resource/:id', function (req, res, next) {
 
 // PUT route to update by id
 router.put('/:resource/:id', function (req, res, next) {
-    
+
     var resource = req.params.resource;
     var id = req.params.id;
     var controller = controllers[resource];
@@ -148,7 +148,7 @@ router.post('/:resource', function (req, res, next) {
     })
 })
 
-// POST route to create a new vacation
+// POST route to create new vacation then associate vacation data to corresponding employee
 router.post('/:resource/:id', function (req, res, next) {
     var id = req.params.id;
     console.log('create vacation with emp id: ' + id);

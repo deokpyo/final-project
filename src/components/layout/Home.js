@@ -20,10 +20,12 @@ export default class Home extends React.Component {
                     </Grid.Row>
 
                     <Grid.Row>
-                        <Grid.Column width={3}>
+                        <Grid.Column>
                             <Nav/>
                         </Grid.Column>
-                        <Grid.Column width={13}>
+                    </Grid.Row>
+                    <Grid.Row>
+                        <Grid.Column>
                             <Switch>
                                 <Route exact path='/' component={Main} />
                                 <Route path='/calendar' component={Calendar} />

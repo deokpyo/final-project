@@ -1,7 +1,6 @@
 import request from 'superagent'
 
-const SLACK_TOKEN = 'xoxp-162663636241-162635272656-174645860997-3bdf74d13a594f9b864cd65a66943ef5&pretty=1'
-
+const SLACK_TOKEN = ''
 let url = `https://slack.com/api/users.list?token=${SLACK_TOKEN}`
 
 export default {
