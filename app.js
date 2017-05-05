@@ -4,13 +4,14 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var request = require('request');
 
 // mongoDB connection
 var mongoose = require('mongoose');
 var dbUrl = 'mongodb://localhost/finalproject';
 var herokuUrl = process.env.MONGODB_URI;
-var SLACK_TOKEN = process.env.SLACK_TOKEN;
-mongoose.connect(herokuUrl || dbUrl, function(err, res){
+
+mongoose.connect(herokuUrl, function(err, res){
   if (err) {
     console.log('DB CONNECTION FAILED: ' + err);
   }
