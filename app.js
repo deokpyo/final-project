@@ -9,15 +9,17 @@ var request = require('request');
 // mongoDB connection
 var mongoose = require('mongoose');
 var dbUrl = 'mongodb://localhost/finalproject';
-var herokuUrl = 'mongodb://heroku_9dgss9gk:ka5op8voo546sistqfn82hek38@ds123351.mlab.com:23351/heroku_9dgss9gk'
-//var herokuUrl = process.env.MONGODB_URI;
+//var herokuUrl = 'mongodb://heroku_9dgss9gk:ka5op8voo546sistqfn82hek38@ds123351.mlab.com:23351/heroku_9dgss9gk'
+var herokuUrl = process.env.MONGODB_URI;
+var SLACK_TOKEN = process.env.SLACK_TOKEN;
 
 mongoose.connect(herokuUrl || dbUrl, function(err, res){
   if (err) {
     console.log('DB CONNECTION FAILED: ' + err);
   }
   else {
-    console.log('DB CONNECTION SUCCESS: ' + dbUrl);
+    console.log('DB CONNECTION SUCCESS: ' + herokuUrl);
+    console.log('SLACK_TOKEN SUCCESS: ' + SLACK_TOKEN);
   }
 })
 
