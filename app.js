@@ -8,7 +8,6 @@ var bodyParser = require('body-parser');
 // mongoDB connection
 var mongoose = require('mongoose');
 var dbUrl = 'mongodb://localhost/finalproject';
-//var herokuUrl = 'mongodb://heroku_9dgss9gk:ka5op8voo546sistqfn82hek38@ds123351.mlab.com:23351/heroku_9dgss9gk';
 var herokuUrl = process.env.MONGODB_URI;
 mongoose.connect(herokuUrl || dbUrl, function(err, res){
   if (err) {
@@ -18,8 +17,6 @@ mongoose.connect(herokuUrl || dbUrl, function(err, res){
     console.log('DB CONNECTION SUCCESS: ' + dbUrl);
   }
 })
-
-console.log(process.env.SECRET_MESSAGE)
 
 // routes
 var index = require('./routes/index');

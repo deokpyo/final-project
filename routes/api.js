@@ -1,11 +1,27 @@
-var express = require('express');
-var router = express.Router();
-var controllers = require('../controllers');
+var express = require('express')
+var router = express.Router()
+var controllers = require('../controllers')
+var request = require('request')
+const SLACK_TOKEN = process.env.SLACK_TOKEN
+
+router.get('/slack', function (req, res, next) {
+    var queryUrl = `https://slack.com/api/users.list?token=${SLACK_TOKEN}`
+    request({ url: queryUrl, json: true }, function (error, response, body) {
+        // If the request is successful (i.e. if the response status code is 200)
+        if(error){
+            res.json(error)
+            return
+        }
+        if (!error && response.statusCode === 200) {
+            res.json(body)
+        }
+    });
+})
 
 // GET route to find all
 router.get('/:resource', function (req, res, next) {
-    var resource = req.params.resource;
-    var controller = controllers[resource];
+    var resource = req.params.resource
+    var controller = controllers[resource]
 
     if (controller == null) {
         res.json({
@@ -193,5 +209,7 @@ router.post('/:resource/:id', function (req, res, next) {
         }
     })
 })
+
+
 
 module.exports = router;
