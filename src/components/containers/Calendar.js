@@ -18,7 +18,7 @@ export default class Calendar extends Component {
   }
   componentDidMount() {
     calendarAPI.getEvents('/api/calendar', null, (err, events) => {
-      console.log(events)
+      //console.log(events)
       this.setState({ events: events })
     })
   }
