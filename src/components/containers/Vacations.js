@@ -40,7 +40,7 @@ export default class Vacations extends React.Component {
     }
 
     createVacation(vacation) {
-        console.log('new vacation: ' + JSON.stringify(vacation));
+        //console.log('new vacation: ' + JSON.stringify(vacation));
         let newVacation = Object.assign({}, vacation);
         let url = '/api/vacation/' + vacation.emp_id
         dbAPI.post(url, newVacation, (err, response) => {

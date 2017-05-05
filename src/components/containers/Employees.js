@@ -22,12 +22,12 @@ export default class Employees extends React.Component {
             this.setState({
                 list: results
             })
-            console.log(this.state.list)
+            //console.log(this.state.list)
         })
     }
 
     createEmployee(employee) {
-        console.log('new employee: ' + JSON.stringify(employee));
+        //console.log('new employee: ' + JSON.stringify(employee));
         let newEmployee = Object.assign({}, employee);
         dbAPI.post('/api/employee/', newEmployee, (err, response) => {
             if (err) {
@@ -45,7 +45,7 @@ export default class Employees extends React.Component {
 
     // delete employee then update the list
     deleteEmployee(id){
-        console.log("delete: " + id);
+        //console.log("delete: " + id);
         dbAPI.delete('/api/employee/', id, (err, response) => {
             if(err){
                 alert('DELETE ERROR: ' + err.message);
