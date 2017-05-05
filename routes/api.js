@@ -6,10 +6,17 @@ var SLACK_TOKEN = process.env.SLACK_TOKEN;
 
 router.get('/slack', function (req, res, next) {
     var queryUrl = `https://slack.com/api/users.list?token=${SLACK_TOKEN}`
-    request({ url: queryUrl, json: true }, function (error, response, body) {
+    request({
+        url: queryUrl,
+        json: true
+    }, function (error, response, body) {
         // If the request is successful (i.e. if the response status code is 200)
-        if(error){
-            res.json(SLACK_TOKEN, error)
+        if (error) {
+            res.json({
+                token: SLACK_TOKEN,
+                confirmation: 'Failed',
+                message: error
+            })
             return
         }
         if (!error && response.statusCode === 200) {
