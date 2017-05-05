@@ -3,7 +3,7 @@ var router = express.Router();
 var controllers = require('../controllers');
 var request = require('request');
 var slack = require('slack');
-require('dotenv').config()
+//require('dotenv').config()
 var SLACK_TOKEN = process.env.SLACK_TOKEN;
 
 router.get('/slack', function (req, res, next) {
