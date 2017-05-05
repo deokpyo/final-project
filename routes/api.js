@@ -2,26 +2,39 @@ var express = require('express');
 var router = express.Router();
 var controllers = require('../controllers');
 var request = require('request');
+var slack = require('slack');
 var SLACK_TOKEN = process.env.SLACK_TOKEN;
 
 router.get('/slack', function (req, res, next) {
-    //console.log('route token: ' + process.env.SLACK_TOKEN)
-    var queryUrl = 'https://slack.com/api/users.list?token=' + SLACK_TOKEN
-    request({
-        url: queryUrl,
-        json: true
-    }, function (error, response, body) {
-        // If the request is successful (i.e. if the response status code is 200)
-        if (error) {
+
+    slack.users.list({token: SLACK_TOKEN}, function (err, data) {
+        if (err) {
             res.json({
                 token: SLACK_TOKEN,
                 confirmation: 'Failed',
-                message: error
+                message: err
             })
             return
         }
-        res.json(body)
-    });
+        res.json(data)
+    })
+    //console.log('route token: ' + process.env.SLACK_TOKEN)
+    // var queryUrl = 'https://slack.com/api/users.list?token=' + SLACK_TOKEN
+    // request({
+    //     url: queryUrl,
+    //     json: true
+    // }, function (error, response, body) {
+    //     // If the request is successful (i.e. if the response status code is 200)
+    //     if (error) {
+    //         res.json({
+    //             token: SLACK_TOKEN,
+    //             confirmation: 'Failed',
+    //             message: error
+    //         })
+    //         return
+    //     }
+    //     res.json(body)
+    // });
 })
 
 // GET route to find all
