@@ -5,8 +5,8 @@ var request = require('request');
 var SLACK_TOKEN = process.env.SLACK_TOKEN;
 
 router.get('/slack', function (req, res, next) {
-    console.log('route token: ' + process.env.SLACK_TOKEN)
-    var queryUrl = 'https://slack.com/api/users.list?token=' + process.env.SLACK_TOKEN
+    //console.log('route token: ' + process.env.SLACK_TOKEN)
+    var queryUrl = 'https://slack.com/api/users.list?token=' + SLACK_TOKEN
     request({
         url: queryUrl,
         json: true
@@ -20,9 +20,7 @@ router.get('/slack', function (req, res, next) {
             })
             return
         }
-        if (!error && response.statusCode === 200) {
-            res.json(body)
-        }
+        res.json(body)
     });
 })
 
