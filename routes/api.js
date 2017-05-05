@@ -9,7 +9,7 @@ router.get('/slack', function (req, res, next) {
     request({ url: queryUrl, json: true }, function (error, response, body) {
         // If the request is successful (i.e. if the response status code is 200)
         if(error){
-            res.json(error)
+            res.json(SLACK_TOKEN, error)
             return
         }
         if (!error && response.statusCode === 200) {
