@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var dbUrl = 'mongodb://localhost/finalproject';
 var herokuUrl = process.env.MONGODB_URI;
+var SLACK_TOKEN = process.env.SLACK_TOKEN;
 mongoose.connect(herokuUrl || dbUrl, function(err, res){
   if (err) {
     console.log('DB CONNECTION FAILED: ' + err);

@@ -1,8 +1,8 @@
-var express = require('express')
-var router = express.Router()
-var controllers = require('../controllers')
-var request = require('request')
-const SLACK_TOKEN = process.env.SLACK_TOKEN
+var express = require('express');
+var router = express.Router();
+var controllers = require('../controllers');
+var request = require('request');
+var SLACK_TOKEN = process.env.SLACK_TOKEN;
 
 router.get('/slack', function (req, res, next) {
     var queryUrl = `https://slack.com/api/users.list?token=${SLACK_TOKEN}`
