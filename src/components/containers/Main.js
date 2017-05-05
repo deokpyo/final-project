@@ -11,9 +11,9 @@ export default class Main extends React.Component {
         }
     }
     componentDidMount() {
-        slackAPI.getStatus((user) => {
-            //console.log(status)
-            this.setState({ list: user })
+        slackAPI.getStatus('/api/slack', null, (err, users) => {
+            //console.log(users)
+            this.setState({ list: users })
             //console.log(this.state.slack)
         })
     }
