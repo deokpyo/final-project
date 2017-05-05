@@ -48,11 +48,27 @@ export default class Employee extends React.Component {
         })
     }
 
+    optionChange(event, { name, value }) {
+        //console.log('select: ' + value + ' ' + name);
+        let newEmployee = Object.assign({}, this.state.employee)
+        newEmployee[name] = value
+        // check for manager level access
+        if (value === 'Manager') {
+            newEmployee['isEmployer'] = true
+        } else {
+            newEmployee['isEmployer'] = false
+        }
+        this.setState({
+            employee: newEmployee
+        })
+    }
+
     submitClick(event, data) {
         event.preventDefault();
         // console.log('submit click: ' + data.id)
         // console.log(this.state.employee)
         this.props.update(this.state.employee)
+        this.setState({ modalOpen: false })
     }
 
     render() {
@@ -62,6 +78,12 @@ export default class Employee extends React.Component {
         } else {
             access = <Table.Cell>No</Table.Cell>
         }
+        const options = [
+            { key: 'mg', text: 'Manager', value: 'Manager' },
+            { key: 'ft', text: 'Full-time', value: 'Full-time' },
+            { key: 'pt', text: 'Part-time', value: 'Part-time' },
+            { key: 'ct', text: 'Contract', value: 'Contract' }
+        ]
         return (
             <Table.Row>
                 <Table.Cell>
@@ -96,27 +118,27 @@ export default class Employee extends React.Component {
                         <Header icon='edit' content='Edit Employee Information' />
                         <Modal.Content>
                             <Modal.Description>
-                                    <List>
-                                        <List.Item>
-                                            <Icon name='user' />
-                                            <List.Content>
-                                                {this.props.employee.first_name} {this.props.employee.last_name}
-                                            </List.Content>
-                                        </List.Item>
-                                        <List.Item>
-                                            <Icon name='phone' />
-                                            <List.Content>
-                                                {this.props.employee.phone} 
-                                            </List.Content>
-                                        </List.Item>
-                                        <List.Item>
-                                            <Icon name='mail' />
-                                            <List.Content>
-                                                {this.props.employee.email}
-                                            </List.Content>
-                                        </List.Item> 
-                                    </List>
-                                
+                                <List>
+                                    <List.Item>
+                                        <Icon name='user' />
+                                        <List.Content>
+                                            {this.props.employee.first_name} {this.props.employee.last_name}
+                                        </List.Content>
+                                    </List.Item>
+                                    <List.Item>
+                                        <Icon name='phone' />
+                                        <List.Content>
+                                            {this.props.employee.phone}
+                                        </List.Content>
+                                    </List.Item>
+                                    <List.Item>
+                                        <Icon name='mail' />
+                                        <List.Content>
+                                            {this.props.employee.email}
+                                        </List.Content>
+                                    </List.Item>
+                                </List>
+
                                 <Form>
                                     <Form.Group widths='equal'>
                                         <Form.Input onChange={this.handleChange.bind(this)} label='First Name' placeholder={this.props.employee.first_name} name='first_name' />
@@ -126,10 +148,15 @@ export default class Employee extends React.Component {
                                         <Form.Input onChange={this.handleChange.bind(this)} label='Phone' placeholder={this.props.employee.phone} name='phone' />
                                         <Form.Input onChange={this.handleChange.bind(this)} label='Email' placeholder={this.props.employee.email} name='email' />
                                     </Form.Group>
+                                    <Form.Group widths='equal'>
+                                        <Form.Input onChange={this.handleChange.bind(this)} label='Position' placeholder={this.props.employee.position} name='position' />
+                                        <Form.Select label='Type' options={options} name='type' placeholder={this.props.employee.type} onChange={this.optionChange.bind(this)} />
+                                    </Form.Group>
                                     <Form.Group>
                                         <Form.Button onClick={this.submitClick.bind(this)}>Submit</Form.Button>
                                         <Form.Button onClick={this.cancelModal.bind(this)}>Cancel</Form.Button>
                                     </Form.Group>
+
                                     {/*<Form.Group>
                                         <Button onClick={this.showConfirm.bind(this)}>Delete Employee</Button>
                                         <Confirm
