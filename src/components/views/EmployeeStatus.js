@@ -3,7 +3,7 @@ import { Header, Image, Table } from 'semantic-ui-react'
 
 export default class EmployeeStatus extends React.Component {
     render() {
-        console.log(this.props.user)
+        //console.log(this.props.user)
         return (
             <Table.Row>
                 <Table.Cell>

@@ -3,11 +3,14 @@ var router = express.Router();
 var controllers = require('../controllers');
 var request = require('request');
 var slack = require('slack');
+// for dev only, comment out when deploying
 //require('dotenv').config()
 var SLACK_TOKEN = process.env.SLACK_TOKEN;
+var GCAL_TOKEN = process.env.GCAL_TOKEN;
+var GCAL_ID = process.env.GCAL_ID;
 
+// SLACK API GET ROUTE
 router.get('/slack', function (req, res, next) {
-
     slack.users.list({token: SLACK_TOKEN}, function (err, data) {
         if (err) {
             res.json({
@@ -19,23 +22,26 @@ router.get('/slack', function (req, res, next) {
         }
         res.json(data)
     })
-    //console.log('route token: ' + process.env.SLACK_TOKEN)
-    // var queryUrl = 'https://slack.com/api/users.list?token=' + SLACK_TOKEN
-    // request({
-    //     url: queryUrl,
-    //     json: true
-    // }, function (error, response, body) {
-    //     // If the request is successful (i.e. if the response status code is 200)
-    //     if (error) {
-    //         res.json({
-    //             token: SLACK_TOKEN,
-    //             confirmation: 'Failed',
-    //             message: error
-    //         })
-    //         return
-    //     }
-    //     res.json(body)
-    // });
+})
+
+// GOOGLE CALENDAR GET ROUTE
+router.get('/calendar', function (req, res, next) {
+    console.log('gcal token: ' + GCAL_ID)
+    var queryUrl = `https://www.googleapis.com/calendar/v3/calendars/${GCAL_ID}/events?key=${GCAL_TOKEN}`
+    request({
+        url: queryUrl,
+        json: true
+    }, function (error, response, body) {
+        if (error) {
+            res.json({
+                token: SLACK_TOKEN,
+                confirmation: 'Failed',
+                message: error
+            })
+            return
+        }
+        res.json(body)
+    });
 })
 
 // GET route to find all

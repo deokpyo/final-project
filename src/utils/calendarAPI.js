@@ -1,20 +1,18 @@
-import request from 'superagent'
-
-const CALENDAR_ID = ''
-const API_KEY = '';
-
-let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?key=${API_KEY}`
+import superagent from 'superagent'
 
 export default {
-
-    getEvents: (callback) => {
-        request
-            .get(url)
+    getEvents: (url, params, callback) => {
+        superagent
+            .get(url).query(params)
+            // type of data we're getting
+            .set('Accept', 'application/json')
+            // call back
             .end((err, resp) => {
                 if (err) {
-                    callback(err);
+                    callback(err, null);
                     return
                 }
+                //console.log(resp)
                 const events = []
                 JSON.parse(resp.text).items.map((event) => {
                     events.push({
@@ -23,8 +21,7 @@ export default {
                         title: event.summary,
                     })
                 })
-                callback(events)
-
+                callback(null, events)
             })
-    }
+    },
 }
