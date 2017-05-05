@@ -9,9 +9,10 @@ var request = require('request');
 // mongoDB connection
 var mongoose = require('mongoose');
 var dbUrl = 'mongodb://localhost/finalproject';
-var herokuUrl = process.env.MONGODB_URI;
+var herokuUrl = 'mongodb://heroku_9dgss9gk:ka5op8voo546sistqfn82hek38@ds123351.mlab.com:23351/heroku_9dgss9gk'
+//var herokuUrl = process.env.MONGODB_URI;
 
-mongoose.connect(herokuUrl, function(err, res){
+mongoose.connect(herokuUrl || dbUrl, function(err, res){
   if (err) {
     console.log('DB CONNECTION FAILED: ' + err);
   }
