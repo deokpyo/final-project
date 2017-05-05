@@ -15,9 +15,15 @@ export default {
                 //console.log(resp)
                 const events = []
                 JSON.parse(resp.text).items.map((event) => {
+                    // convert to Date object
+                    var startString = event.start.date || event.start.dateTime
+                    var endString = event.end.date || event.end.dateTime
+                    var startDate = new Date(startString)
+                    var endDate = new Date(endString)
+
                     events.push({
-                        start: event.start.date || event.start.dateTime,
-                        end: event.end.date || event.end.dateTime,
+                        start: startDate,
+                        end: endDate,
                         title: event.summary,
                     })
                 })
