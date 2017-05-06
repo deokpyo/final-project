@@ -40,13 +40,19 @@ export default class CreateVacation extends React.Component {
         console.log(this.state.vacation)
         this.props.onCreate(this.state.vacation);
         this.setState({
-            emp_id: '',
-            reason: '',
+            vacation: {
+                emp_id: '',
+                start_date: '',
+                end_date: '',
+                reason: '',
+                status: 'Pending',
+                approved: false,
+                rejected: false,
+            }
         })
     }
 
     render() {
-        const { name, start_date, end_date, reason } = this.state
         const options = [
             { key: 'vc', text: 'Vacation', value: 'Vacation' },
             { key: 'ps', text: 'Personal', value: 'Personal' },
@@ -66,12 +72,12 @@ export default class CreateVacation extends React.Component {
         return (
             <Form>
                 <Form.Group widths='equal'>
-                    <Form.Select label='Name' options={name_options} name='emp_id' placeholder='Name' onChange={this.optionChange.bind(this)} value={this.state.emp_id} />
-                    <Form.Select label='Reason' options={options} name='reason' placeholder='Reason' onChange={this.optionChange.bind(this)} value={this.state.reason} />
+                    <Form.Select label='Name' options={name_options} name='emp_id' placeholder='Name' onChange={this.optionChange.bind(this)} value={this.state.vacation.emp_id} />
+                    <Form.Select label='Reason' options={options} name='reason' placeholder='Reason' onChange={this.optionChange.bind(this)} value={this.state.vacation.reason} />
                 </Form.Group>
                 <Form.Group widths='equal'>
-                    <Form.Input type="date" label='Start Date' placeholder='Start Date' name='start_date' onChange={this.handleChange.bind(this)} value={this.state.start_date} />
-                    <Form.Input type="date" label='End Date' placeholder='End Date' name='end_date' onChange={this.handleChange.bind(this)} value={this.state.end_date} />
+                    <Form.Input type="date" label='Start Date' placeholder='Start Date' name='start_date' onChange={this.handleChange.bind(this)} value={this.state.vacation.start_date} />
+                    <Form.Input type="date" label='End Date' placeholder='End Date' name='end_date' onChange={this.handleChange.bind(this)} value={this.state.vacation.end_date} />
                 </Form.Group>
                 <Form.Button onClick={this.handleSubmit.bind(this)}>Submit</Form.Button>
             </Form>
